@@ -2,36 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-      <activeProfiles>
-        <activeProfile>github</activeProfile>
-      </activeProfiles>
-
-      <profiles>
-        <profile>
-          <id>github</id>
-          <repositories>
-            <repository>
-              <id>central</id>
-              <url>https://repo1.maven.org/maven2</url>
-            </repository>
-            <repository>
-              <id>github</id>
-              <url>https://maven.pkg.github.com/kentzhu1125/java-demo</url>
-              <snapshots>
-                <enabled>true</enabled>
-              </snapshots>
-            </repository>
-          </repositories>
-        </profile>
-      </profiles>
-
-      <servers>
-        <server>
-          <id>github</id>
-          <username>kentzhu1125</username>
-          <password>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</password>
-        </server>
-      </servers>
    
     <groupId>demo</groupId>
     <artifactId>maven-demo</artifactId>
