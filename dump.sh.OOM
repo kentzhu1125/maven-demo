@@ -1,0 +1,15 @@
+#/bin/bash
+HEAP_DUMP_PATH=/heapdump/`hostname`
+mkdir -p ${HEAP_DUMP_PATH}
+PS_SET=`ps -ef|grep java|grep -v grep|awk '{print $2}'`
+echo "-----------"$PS_NUMBER"--------"
+if [ -z $PS_SET ]
+then
+echo "can not get java process" > ${HEAP_DUMP_PATH}/ps.error
+else
+for PS_NUMBER in ${PS_SET}
+do
+jstack $PS_NUMBER > ${HEAP_DUMP_PATH}/${PS_NUMBER}.jstack
+jmap -histo $PS_NUMBER|head -20 > ${HEAP_DUMP_PATH}/${PS_NUMBER}.histo
+done
+fi

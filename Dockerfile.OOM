@@ -1,0 +1,8 @@
+FROM java:8
+COPY CrunchifyGenerateOOM.java CrunchifyGenerateOOM.java
+COPY entrypoint.sh entrypoint.sh
+COPY dump.sh dump.sh
+RUN mkdir /log
+EXPOSE 8080
+RUN javac -encoding utf-8 -d /  CrunchifyGenerateOOM.java
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_NAME}
+  namespace: ${NAMESPACE}
+spec:
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+        releasedate: "20200528"
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      #      volumes:
+      #        - configMap:
+      #            name: nginx-config
+      #          name: nginx-config
+      #        - name: log-file
+      #          hostPath:
+      #            path: /tmp/nginx
+      containers:
+        - image: ${REGISTRY}/${DOCKERHUB_NAMESPACE}/${APP_NAME}:${BRANCH_NAME}-${BUILD_NUMBER}
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+          env:
+            - name: "JAVA_OPTS"
+              value: "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dump
+              -Xloggc:/log/java-demo-%t.log
+              -XX:+UseGCLogFileRotation
+              -XX:NumberOfGCLogFiles=5
+              -XX:GCLogFileSize=20M
+              -XX:+PrintGCDetails
+              -XX:+PrintGCDateStamps
+              -XX:+PrintGCCause
+              -Xmx50M -Xms50M"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          name: ${APP_NAME}
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          ports:
+            - containerPort: 8080
+      #        volumeMounts:
+      #          - mountPath: /etc/nginx/conf.d/
+      #            name: nginx-config
+      #            readOnly: false
+      #          - name: log-file
+      #            mountPath: /var/log/nginx
+      imagePullSecrets:
+        - name: harbor
+      restartPolicy: Always

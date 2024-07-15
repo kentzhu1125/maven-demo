@@ -1,0 +1,4 @@
+#!/bin/sh
+HeapDumpPath=/heapdump/${POD_NAME}/
+mkdir -p ${HeapDumpPath}
+java ${JAVA_OPTS} -XX:HeapDumpPath=${HeapDumpPath} com.crunchify.tutorials.CrunchifyGenerateOOM 
