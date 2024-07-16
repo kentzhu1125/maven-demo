@@ -26,11 +26,24 @@
     </profile>
   </profiles>
 
-  <servers>
+<!--   <servers>
     <server>
       <id>github</id>
       <username>kentzhu1125</username>
       <password>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</password>
+    </server>
+  </servers>
+  <servers> -->
+    <server>
+      <id>github</id>
+      <configuration>
+        <httpHeaders>
+          <property>
+            <name>Authorization</name>
+            <value>Bearer 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</value>
+          </property>
+        </httpHeaders>
+      </configuration>
     </server>
   </servers>
 </settings>
