@@ -26,14 +26,14 @@
     </profile>
   </profiles>
 
-<!--   <servers>
+  <servers>
     <server>
       <id>github</id>
       <username>kentzhu1125</username>
-      <password>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</password>
+      <password>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</password>
     </server>
   </servers>
-  <servers> -->
+<!--   <servers>
     <server>
       <id>github</id>
       <configuration>
@@ -45,5 +45,5 @@
         </httpHeaders>
       </configuration>
     </server>
-  </servers>
+  </servers> -->
 </settings>
