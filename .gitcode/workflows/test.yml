@@ -1,0 +1,26 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: euleros-2.10.1
+
+    steps:
+    - uses: checkout-action@0.0.1
+    - name: Set up Python 
+      uses: setup-python@0.0.1
+      with:
+        python-version: 3.8.18
+    - name: Install Dependencies
+      run: |
+        cd repo_workspace && python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python manage.py test
