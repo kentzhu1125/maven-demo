@@ -1,4 +1,4 @@
-name: demo-for-maven
+name: test
 on:
   push:
     branches: [ "main" ]
