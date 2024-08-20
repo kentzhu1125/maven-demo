@@ -11,8 +11,6 @@ name: Maven-Deploy-Demo
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
     
 permissions:
   packages: write
